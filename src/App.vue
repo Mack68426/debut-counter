@@ -41,7 +41,7 @@ onMounted(() => {
         <span class="label">天</span>
       </div>
       <div class="time-unit">
-        <span class="number">{{ timeLeft.hours }}</span>
+        <span class="number">{{ timeLeft.hours.toString().padStart(2, "0") }}</span> 
         <span class="label">時</span>
       </div>
       <div class="time-unit">
@@ -49,7 +49,7 @@ onMounted(() => {
         <span class="label">分</span>
       </div>
       <div class="time-unit">
-        <span class="number">{{ timeLeft.seconds }}</span>
+        <span class="number">{{ timeLeft.seconds.toString().padStart(2, "0") }}</span>
         <span class="label">秒</span>
       </div>
     </div>
