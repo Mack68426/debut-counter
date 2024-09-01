@@ -59,6 +59,7 @@ jobs:
       
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v3
+        id: deployment
         with:
-          # token: ${{ secrets.DEVPLOY_TOKEN }}
+          github_token: ${{ secrets.DEVPLOY_TOKEN }}
           publish_dir: ./dist
