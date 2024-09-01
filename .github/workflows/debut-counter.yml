@@ -61,5 +61,5 @@ jobs:
         uses: actions/deploy-pages@v3
         id: deployment
         with:
-          github_token: ${{ secrets.DEVPLOY_TOKEN }}
+          token: ${{ secrets.DEVPLOY_TOKEN }}
           publish_dir: ./dist
