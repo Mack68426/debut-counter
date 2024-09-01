@@ -21,8 +21,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # Single deploy job since we're just deploying
-  deploy:
+  build:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -34,13 +33,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
-      - name: Install dependencies
-        run: npm ci
       - name: GitHub Action for Yarn
         uses: Borales/actions-yarn@v5.0.0
+      - name: Install dependencies
+        run: yarn
       - name: Build
-        run: yarn build && yarn install
+        run: yarn build
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
@@ -48,6 +46,15 @@ jobs:
         with:
           # Upload dist folder
           path: './dist'
+    
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          github_token: ${{ secrets.DEVPLOY_TOKEN}}
+          publish_dir: ./dist
