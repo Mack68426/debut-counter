@@ -36,11 +36,9 @@ jobs:
         with:
           node-version: 20
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
-      - name: GitHub Action for Yarn
-        uses: Borales/actions-yarn@v5.0.0
+        run: yarn
       - name: Build
-        run: npm run build
+        run: yarn build
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
